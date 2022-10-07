@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Task 1</string>
+    <string name="text_for_anagram">Text for anagram</string>
+    <string name="enter_text_for_anagram">Enter text for anagram</string>
+</resources>
