@@ -3,6 +3,7 @@ package com.example.task1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,20 +22,15 @@ public class MainActivity extends AppCompatActivity {
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
-                if (focusOn == true) {
+                if (focusOn) {
                     inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
+                    editTextForAnagram.setGravity(Gravity.START);
                 } else {
                     inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
+//                    inputLayoutForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
+//                    editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
                 }
             }
         });
-
-//        editTextForAnagram.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
-//            }
-//        });
-
     }
 }
