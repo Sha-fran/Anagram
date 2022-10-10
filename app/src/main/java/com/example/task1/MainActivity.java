@@ -18,13 +18,23 @@ public class MainActivity extends AppCompatActivity {
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
 
-        //I thought, that click on view for start of writing an anagram is a click, so used this method
-        editTextForAnagram.setOnClickListener(new View.OnClickListener() {
+        editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
-                editTextForAnagram.setHint(getString(R.string.text_for_anagram));
+            public void onFocusChange(View view, boolean focusOn) {
+                if (focusOn == true) {
+                    inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
+                } else {
+                    inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
+                }
             }
         });
+
+//        editTextForAnagram.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
+//            }
+//        });
 
     }
 }
