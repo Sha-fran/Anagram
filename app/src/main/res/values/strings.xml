@@ -2,4 +2,6 @@
     <string name="app_name">Task 1</string>
     <string name="text_for_anagram">Text for anagram</string>
     <string name="enter_text_for_anagram">Enter text for anagram</string>
+    <string name="task_1">Task 1</string>
+    <string name="here_must_be_your_anagram">Here must be your anagram</string>
 </resources>

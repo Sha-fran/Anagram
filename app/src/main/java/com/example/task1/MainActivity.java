@@ -1,10 +1,12 @@
 package com.example.task1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
                     editTextForAnagram.setGravity(Gravity.START);
                 } else {
                     inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
-//                    inputLayoutForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
-//                    editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
+                    editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
+                    view.requestLayout();
                 }
             }
         });
