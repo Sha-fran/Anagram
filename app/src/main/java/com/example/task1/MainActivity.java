@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void wordsReverse(String[] words) {
-        for (int i = 0, j = words.length - 1; i < words.length; i++, j--) {
+        for (int i = 0, j = words.length - 1; i < j; i++, j--) {
             String tmp = words[i];
             words[i] = words[j];
             words[j] = tmp;
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     protected void symbolsReverse(String word, String filter) {
         char[] symbols = word.toCharArray();
 
-        for ( int i = 0, j = symbols.length - 1; i < symbols.length; i++) {
+        for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
             if (filterCheck(symbols[i], filter.toCharArray())) {
                 i++;
             } else {
