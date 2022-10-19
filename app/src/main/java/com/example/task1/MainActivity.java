@@ -82,16 +82,31 @@ public class MainActivity extends AppCompatActivity {
     protected String symbolsReverse(String word, String filter) {
         char[] symbols = word.toCharArray();
 
-        for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-            if (filterCheck(symbols[i], filter.toCharArray())) {
-                i++;
+        if ( filter.isEmpty()) {
+            for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
+                while (!checkUpperCaseSymbol(symbols[i]) && !checkUpperLowerSymbol(symbols[i]) && i < j) {
+                    i++;
+                }
+
+                while (!checkUpperCaseSymbol(symbols[j]) && !checkUpperLowerSymbol(symbols[j]) && j > i) {
+                    j--;
+                }
+                char tmp = symbols[i];
+                symbols[i] = symbols[j];
+                symbols[j] = tmp;
             }
-            if (filterCheck(symbols[j], filter.toCharArray())) {
-                j--;
+        } else {
+            for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
+                while (filterCheck(symbols[i], filter.toCharArray()) && i < j) {
+                    i++;
+                }
+                while (filterCheck(symbols[j], filter.toCharArray()) && j > i) {
+                    j--;
+                }
+                char tmp = symbols[i];
+                symbols[i] = symbols[j];
+                symbols[j] = tmp;
             }
-            char tmp = symbols[i];
-            symbols[i] = symbols[j];
-            symbols[j] = tmp;
         }
         return new String(symbols);
     }
@@ -105,15 +120,29 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    protected void checkCharArr(char[] symbols, int i) {
+        if (!checkUpperCaseSymbol(symbols[i]) && !checkUpperLowerSymbol(symbols[i])) {
+            i++;
+        }
+    }
+
+    protected boolean checkUpperCaseSymbol(char check) {
+        return check >= 'A' && check <= 'Z';
+    }
+
+    protected boolean checkUpperLowerSymbol(char check) {
+        return check >= 'a' && check <= 'z';
+    }
+
     protected String buildOfAnagram(String[] wordsAfterReverse) {
-        String resultString = "";
+        StringBuilder resultString = new StringBuilder();
         int lastIndex = wordsAfterReverse.length - 1;
 
         for (int i = 0; i < lastIndex; i++) {
-            resultString += wordsAfterReverse[i] + " ";
+            resultString.append(wordsAfterReverse[i]).append(" ");
         }
-        resultString += wordsAfterReverse[lastIndex];
+        resultString.append(wordsAfterReverse[lastIndex]);
 
-        return resultString;
+        return resultString.toString();
     }
 }
