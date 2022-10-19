@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
-//        TextInputLayout filterInputlayot = findViewById(R.id.filterInputlayot);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
         TextView myAnagram = findViewById(R.id.myAnagram);
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
                     editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
                     view.requestLayout();
+                    editTextForAnagram.clearFocus();
                 }
             }
         });
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     filterInputText.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
                     view.requestLayout();
+                    filterInputText.clearFocus();
                 }
             }
         });
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                preViewOfAnagram.setVisibility(View.INVISIBLE);
+                myAnagram.setVisibility(View.VISIBLE);
                 myAnagram.setText(convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
             }
         });
@@ -87,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 while (!checkUpperCaseSymbol(symbols[i]) && !checkUpperLowerSymbol(symbols[i]) && i < j) {
                     i++;
                 }
-
                 while (!checkUpperCaseSymbol(symbols[j]) && !checkUpperLowerSymbol(symbols[j]) && j > i) {
                     j--;
                 }
@@ -118,12 +120,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
-
-    protected void checkCharArr(char[] symbols, int i) {
-        if (!checkUpperCaseSymbol(symbols[i]) && !checkUpperLowerSymbol(symbols[i])) {
-            i++;
-        }
     }
 
     protected boolean checkUpperCaseSymbol(char check) {

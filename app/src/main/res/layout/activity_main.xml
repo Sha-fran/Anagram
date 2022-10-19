@@ -65,6 +65,7 @@
         android:layout_marginTop="32dp"
         android:text="@string/here_must_be_your_anagram"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
@@ -92,6 +93,7 @@
         android:textColor="#ffaa00"
         android:textSize="20sp"
         android:textStyle="normal"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
