@@ -68,19 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
     protected String convertToAnagram(String textForAnagram, String filterForAnagram) {
         String[] wordsForAnagram = textForAnagram.split(" ");
-//        wordsReverse(wordsForAnagram);
         symbolsInWordsReverse(wordsForAnagram, filterForAnagram);
 
         return buildOfAnagram(wordsForAnagram);
     }
-
-//    protected void wordsReverse(String[] words) {
-//        for (int i = 0, j = words.length - 1; i < j; i++, j--) {
-//            String tmp = words[i];
-//            words[i] = words[j];
-//            words[j] = tmp;
-//        }
-//    }
 
     protected void symbolsInWordsReverse(String[] words, String filter) {
         for (int i = 0; i < words.length; i++) {
@@ -94,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
         for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
             if (filterCheck(symbols[i], filter.toCharArray())) {
                 i++;
+            }
+            if (filterCheck(symbols[j], filter.toCharArray())) {
+                j--;
             }
             char tmp = symbols[i];
             symbols[i] = symbols[j];
@@ -112,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected String buildOfAnagram(String[] wordsAfterReverse) {
-        return Arrays.toString(wordsAfterReverse);
+        String resultString = "";
+        int lastIndex = wordsAfterReverse.length - 1;
+
+        for (int i = 0; i < lastIndex; i++) {
+            resultString = wordsAfterReverse[i] + " ";
+        }
+        resultString += wordsAfterReverse[lastIndex];
+
+        return resultString;
     }
 }
