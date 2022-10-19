@@ -68,43 +68,43 @@ public class MainActivity extends AppCompatActivity {
 
     protected String convertToAnagram(String textForAnagram, String filterForAnagram) {
         String[] wordsForAnagram = textForAnagram.split(" ");
-        wordsReverse(wordsForAnagram);
+//        wordsReverse(wordsForAnagram);
         symbolsInWordsReverse(wordsForAnagram, filterForAnagram);
 
         return buildOfAnagram(wordsForAnagram);
     }
 
-    protected void wordsReverse(String[] words) {
-        for (int i = 0, j = words.length - 1; i < j; i++, j--) {
-            String tmp = words[i];
-            words[i] = words[j];
-            words[j] = tmp;
-        }
-    }
+//    protected void wordsReverse(String[] words) {
+//        for (int i = 0, j = words.length - 1; i < j; i++, j--) {
+//            String tmp = words[i];
+//            words[i] = words[j];
+//            words[j] = tmp;
+//        }
+//    }
 
     protected void symbolsInWordsReverse(String[] words, String filter) {
         for (int i = 0; i < words.length; i++) {
-            symbolsReverse(words[i], filter);
+            words[i] = symbolsReverse(words[i], filter);
         }
     }
 
-    protected void symbolsReverse(String word, String filter) {
+    protected String symbolsReverse(String word, String filter) {
         char[] symbols = word.toCharArray();
 
         for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
             if (filterCheck(symbols[i], filter.toCharArray())) {
                 i++;
-            } else {
-                char tmp = symbols[i];
-                symbols[i] = symbols[j];
-                symbols[j] = tmp;
             }
+            char tmp = symbols[i];
+            symbols[i] = symbols[j];
+            symbols[j] = tmp;
         }
+        return new String(symbols);
     }
 
     protected boolean filterCheck(char symbolToCheck, char[] filterSymbols) {
-        for (int i = 0; i < filterSymbols.length; i++) {
-            if (filterSymbols[i] == symbolToCheck) {
+        for (char filterSymbol : filterSymbols) {
+            if (filterSymbol == symbolToCheck) {
                 return true;
             }
         }
