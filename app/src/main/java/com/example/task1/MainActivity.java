@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         int lastIndex = wordsAfterReverse.length - 1;
 
         for (int i = 0; i < lastIndex; i++) {
-            resultString = wordsAfterReverse[i] + " ";
+            resultString += wordsAfterReverse[i] + " ";
         }
         resultString += wordsAfterReverse[lastIndex];
 
