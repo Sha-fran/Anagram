@@ -1,20 +1,20 @@
 package com.example.task1;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.TextureView;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,10 +39,30 @@ public class MainActivity extends AppCompatActivity {
                     editTextForAnagram.setGravity(Gravity.START);
                 } else {
                     inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
-                    editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
+                    editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
                     view.requestLayout();
-                    editTextForAnagram.clearFocus();
                 }
+            }
+        });
+
+        editTextForAnagram.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().length() < 1) {
+                    convertButton.setVisibility(View.INVISIBLE);
+                } else {
+                    convertButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -52,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 if (focusOn) {
                     filterInputText.setGravity(Gravity.START);
                 } else {
-                    filterInputText.setGravity(Gravity.CLIP_VERTICAL|Gravity.CENTER_HORIZONTAL);
+                    filterInputText.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
                     view.requestLayout();
                     filterInputText.clearFocus();
                 }
@@ -65,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 preViewOfAnagram.setVisibility(View.INVISIBLE);
                 myAnagram.setVisibility(View.VISIBLE);
                 myAnagram.setText(convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
+                closeKeyboard();
             }
         });
     }
@@ -85,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
     protected String symbolsReverse(String word, String filter) {
         char[] symbols = word.toCharArray();
 
-        if ( filter.isEmpty()) {
-            for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-                while (!checkUpperCaseSymbol(symbols[i]) && !checkUpperLowerSymbol(symbols[i]) && i < j) {
+        if (filter.isEmpty()) {
+            for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
+                while (checkUpperCaseSymbol(symbols[i]) && checkUpperLowerSymbol(symbols[i]) && i < j) {
                     i++;
                 }
-                while (!checkUpperCaseSymbol(symbols[j]) && !checkUpperLowerSymbol(symbols[j]) && j > i) {
+                while (checkUpperCaseSymbol(symbols[j]) && checkUpperLowerSymbol(symbols[j]) && j > i) {
                     j--;
                 }
                 char tmp = symbols[i];
@@ -98,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 symbols[j] = tmp;
             }
         } else {
-            for ( int i = 0, j = symbols.length - 1; i < j; i++, j--) {
+            for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
                 while (filterCheck(symbols[i], filter.toCharArray()) && i < j) {
                     i++;
                 }
@@ -123,11 +144,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected boolean checkUpperCaseSymbol(char check) {
-        return check >= 'A' && check <= 'Z';
+        return check < 'A' || check > 'Z';
     }
 
     protected boolean checkUpperLowerSymbol(char check) {
-        return check >= 'a' && check <= 'z';
+        return check < 'a' || check > 'z';
     }
 
     protected String buildOfAnagram(String[] wordsAfterReverse) {
@@ -140,5 +161,13 @@ public class MainActivity extends AppCompatActivity {
         resultString.append(wordsAfterReverse[lastIndex]);
 
         return resultString.toString();
+    }
+
+    protected void closeKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
