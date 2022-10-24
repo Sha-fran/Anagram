@@ -1,9 +1,11 @@
 package com.example.task1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
         TextView myAnagram = findViewById(R.id.myAnagram);
         Button convertButton = findViewById(R.id.convertButton);
+
+//        editTextForAnagram.setText(savedInstanceState.getString("editTextForAnagram"));
+//        filterInputText.setText(savedInstanceState.getString("filterInputText"));
+        myAnagram.setText(savedInstanceState.getString("myAnagram"));
+
 
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -170,4 +177,63 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+//        outState.putString("editTextForAnagram", Objects.requireNonNull(editTextForAnagram.getText()).toString());
+//        outState.putString("filterInputText", Objects.requireNonNull(filterInputText.getText()).toString());
+        outState.putString("myAnagram", myAnagram.getText().toString());
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
