@@ -20,22 +20,27 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+     String anagram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
+                TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
         TextView myAnagram = findViewById(R.id.myAnagram);
         Button convertButton = findViewById(R.id.convertButton);
 
+        if (savedInstanceState != null) {
+            myAnagram.setText(savedInstanceState.getString("myAnagram"));
+            preViewOfAnagram.setVisibility(View.INVISIBLE);
+            myAnagram.setVisibility(View.VISIBLE);
+        }
 //        editTextForAnagram.setText(savedInstanceState.getString("editTextForAnagram"));
 //        filterInputText.setText(savedInstanceState.getString("filterInputText"));
-        myAnagram.setText(savedInstanceState.getString("myAnagram"));
 
 
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 myAnagram.setVisibility(View.VISIBLE);
                 myAnagram.setText(convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
                 closeKeyboard();
+                anagram = myAnagram.getText().toString();
             }
         });
     }
@@ -184,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        outState.putString("editTextForAnagram", Objects.requireNonNull(editTextForAnagram.getText()).toString());
 //        outState.putString("filterInputText", Objects.requireNonNull(filterInputText.getText()).toString());
-        outState.putString("myAnagram", myAnagram.getText().toString());
+        outState.putString("myAnagram", anagram);
     }
 }
 
