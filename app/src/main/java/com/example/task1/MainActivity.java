@@ -43,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
                 if (focusOn || Objects.requireNonNull(editTextForAnagram.getText()).toString().length() > 0) {
+                    editTextForAnagram.setTextSize(22);
                     inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
                     editTextForAnagram.setGravity(Gravity.START);
                 } else {
+                    editTextForAnagram.setTextSize(16);
                     inputLayoutForAnagram.setHint(getString(R.string.enter_text_for_anagram));
                     editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
                     view.requestLayout();
@@ -59,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean focusOn) {
                 if (focusOn || Objects.requireNonNull(filterInputText.getText()).toString().length() > 0) {
                     filterInputText.setGravity(Gravity.START);
+                    filterInputText.setTextSize(22);
                 } else {
                     filterInputText.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                    filterInputText.setTextSize(16);
                     view.requestLayout();
                     closeKeyboard();
                 }
