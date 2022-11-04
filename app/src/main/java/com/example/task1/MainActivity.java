@@ -2,6 +2,7 @@ package com.example.task1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final UserModel viewModel = ViewModelProvider.of(this).get(UserModel.class);
+        viewModel.userLiveData.observer(this, new Observer() {
+            @Override
+                public void onChangeed(@Nullable User data){
+            }
+        });
+
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
@@ -34,9 +42,13 @@ public class MainActivity extends AppCompatActivity {
         TextView myAnagram = findViewById(R.id.myAnagram);
 
         if (savedInstanceState != null) {
-            myAnagram.setText(savedInstanceState.getString("myAnagram"));
+            String savedAnagram = savedInstanceState.getString("myAnagram");
+            myAnagram.setText(savedAnagram);
             preViewOfAnagram.setVisibility(View.INVISIBLE);
             myAnagram.setVisibility(View.VISIBLE);
+//            if (savedAnagram.length() > 0) {
+//                editTextForAnagram.setGravity(Gravity.START);
+//            }
         }
 
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
