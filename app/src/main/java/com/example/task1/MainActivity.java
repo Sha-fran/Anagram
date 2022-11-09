@@ -1,7 +1,5 @@
 package com.example.task1;
 
-import com.example.task1.UserModel;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,9 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,13 +25,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final UserModel viewModel = ViewModelProvider.of(this).get(UserModel.class);
-        viewModel.userLiveData.observer(this, new Observer() {
-            @Override
-                public void onChangeed(@Nullable User data){
-            }
-        });
-
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
@@ -48,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
             preViewOfAnagram.setVisibility(View.INVISIBLE);
             myAnagram.setVisibility(View.VISIBLE);
 //            if (savedAnagram.length() > 0) {
-//                editTextForAnagram.setGravity(Gravity.START);
+                editTextForAnagram.setGravity(Gravity.START);
+                filterInputText.setGravity(Gravity.START);
+                editTextForAnagram.setTextSize(22);
+                filterInputText.setTextSize(22);
 //            }
         }
 
@@ -209,53 +201,3 @@ public class MainActivity extends AppCompatActivity {
         outState.putString("myAnagram", anagram);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
