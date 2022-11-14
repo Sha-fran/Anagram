@@ -8,9 +8,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+//import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -19,12 +21,17 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     String anagram;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        getSupportActionBar().hide();
+
+        Toolbar toolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
