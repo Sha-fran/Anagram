@@ -8,9 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-//import android.widget.Toolbar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,37 +18,34 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    String anagram;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        getSupportActionBar().hide();
-
+        //link between custom toolbar and logic of program
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
+
+        // link between views from xml and logic of program
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
         TextView myAnagram = findViewById(R.id.myAnagram);
 
+//      redefining state of view after rotation
         if (savedInstanceState != null) {
-            String savedAnagram = savedInstanceState.getString("myAnagram");
-            myAnagram.setText(savedAnagram);
             preViewOfAnagram.setVisibility(View.INVISIBLE);
             myAnagram.setVisibility(View.VISIBLE);
-//            if (savedAnagram.length() > 0) {
-                editTextForAnagram.setGravity(Gravity.START);
-                filterInputText.setGravity(Gravity.START);
-                editTextForAnagram.setTextSize(22);
-                filterInputText.setTextSize(22);
-//            }
+            editTextForAnagram.setGravity(Gravity.START);
+            filterInputText.setGravity(Gravity.START);
+            editTextForAnagram.setTextSize(22);
+            filterInputText.setTextSize(22);
         }
 
+        //change state of view editTextForAnagram despite of focus
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
@@ -68,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //change state of view filterInputText despite of focus
         filterInputText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
@@ -83,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //listen of text input and sent each symbol to method in TextConvertToAnagram
         editTextForAnagram.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 preViewOfAnagram.setVisibility(View.INVISIBLE);
                 myAnagram.setVisibility(View.VISIBLE);
-                myAnagram.setText(convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
             }
 
             @Override
@@ -102,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //listen of filter input and sent each symbol to method in TextConvertToAnagram to correct anagram according to filter
         filterInputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                myAnagram.setText(convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
             }
 
             @Override
@@ -120,91 +118,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected String convertToAnagram(String textForAnagram, String filterForAnagram) {
-        String[] wordsForAnagram = textForAnagram.split(" ");
-        symbolsInWordsReverse(wordsForAnagram, filterForAnagram);
-
-        return buildOfAnagram(wordsForAnagram);
-    }
-
-    protected void symbolsInWordsReverse(String[] words, String filter) {
-        for (int i = 0; i < words.length; i++) {
-            words[i] = symbolsReverse(words[i], filter);
-        }
-    }
-
-    protected String symbolsReverse(String word, String filter) {
-        char[] symbols = word.toCharArray();
-
-        if (filter.isEmpty()) {
-            for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-                while (checkUpperCaseSymbol(symbols[i]) && checkUpperLowerSymbol(symbols[i]) && i < j) {
-                    i++;
-                }
-                while (checkUpperCaseSymbol(symbols[j]) && checkUpperLowerSymbol(symbols[j]) && j > i) {
-                    j--;
-                }
-                char tmp = symbols[i];
-                symbols[i] = symbols[j];
-                symbols[j] = tmp;
-            }
-        } else {
-            for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-                while (filterCheck(symbols[i], filter.toCharArray()) && i < j) {
-                    i++;
-                }
-                while (filterCheck(symbols[j], filter.toCharArray()) && j > i) {
-                    j--;
-                }
-                char tmp = symbols[i];
-                symbols[i] = symbols[j];
-                symbols[j] = tmp;
-            }
-        }
-        return new String(symbols);
-    }
-
-    protected boolean filterCheck(char symbolToCheck, char[] filterSymbols) {
-        for (char filterSymbol : filterSymbols) {
-            if (filterSymbol == symbolToCheck) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected boolean checkUpperCaseSymbol(char check) {
-        return check < 'A' || check > 'Z';
-    }
-
-    protected boolean checkUpperLowerSymbol(char check) {
-        return check < 'a' || check > 'z';
-    }
-
-    protected String buildOfAnagram(String[] wordsAfterReverse) {
-        StringBuilder resultString = new StringBuilder();
-        int lastIndex = wordsAfterReverse.length - 1;
-
-        for (int i = 0; i < lastIndex; i++) {
-            resultString.append(wordsAfterReverse[i]).append(" ");
-        }
-        resultString.append(wordsAfterReverse[lastIndex]);
-
-        return resultString.toString();
-    }
-
+    //hide keyboard
     protected void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putString("myAnagram", anagram);
     }
 }
