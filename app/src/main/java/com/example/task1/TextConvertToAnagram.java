@@ -2,8 +2,10 @@ package com.example.task1;
 
 public class TextConvertToAnagram {
 
-    //start a process of converting - split text for anagram into individual words and create array of words
-    //return anagram
+    /**
+     * start a process of converting - split text for anagram into individual words and create array of words
+     * @return built anagram
+     */
     public static String convertToAnagram(String textForAnagram, String filterForAnagram) {
         String[] wordsForAnagram = textForAnagram.split(" ");
         symbolsInWordsReverse(wordsForAnagram, filterForAnagram);
@@ -11,24 +13,29 @@ public class TextConvertToAnagram {
         return buildOfAnagram(wordsForAnagram);
     }
 
-    //loop which direct each word to reverse
+    /**
+     * loop which direct each word to reverse
+     */
     public static void symbolsInWordsReverse(String[] words, String filter) {
         for (int i = 0; i < words.length; i++) {
             words[i] = symbolsReverse(words[i], filter);
         }
     }
 
-    //reverse each word taking into account filter symbols - keep position of symbols from filter
-    //check each symbol - doesn't take into account digits and non alphabetic symbols
+    /**
+     * reverse each word taking into account filter symbols - keep position of symbols from filter
+     * check each symbol - doesn't take into account digits and non alphabetic symbols
+     * @return reversed and filtered word
+     */
     public static String symbolsReverse(String word, String filter) {
         char[] symbols = word.toCharArray();
 
         if (filter.isEmpty()) {
             for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-                while (checkUpperCaseSymbol(symbols[i]) && checkUpperLowerSymbol(symbols[i]) && i < j) {
+                while (symbolCheck(symbols[i]) && i < j) {
                     i++;
                 }
-                while (checkUpperCaseSymbol(symbols[j]) && checkUpperLowerSymbol(symbols[j]) && j > i) {
+                while (symbolCheck(symbols[i]) && j > i) {
                     j--;
                 }
                 char tmp = symbols[i];
@@ -51,7 +58,10 @@ public class TextConvertToAnagram {
         return new String(symbols);
     }
 
-    //checking symbols - comparison with symbols from filter
+    /**
+     * checking symbols - comparison with symbols from filter
+     * @return true symbol anf filter are equal and false if no
+     */
     public static boolean filterCheck(char symbolToCheck, char[] filterSymbols) {
         for (char filterSymbol : filterSymbols) {
             if (filterSymbol == symbolToCheck) {
@@ -61,16 +71,18 @@ public class TextConvertToAnagram {
         return false;
     }
 
-    //checking digits and non alphabetic symbols
-    public static boolean checkUpperCaseSymbol(char check) {
-        return check < 'A' || check > 'Z';
+    /**
+     * checking digits and non alphabetic symbols
+     * @return false if symbol is alphabetic and true if no
+     */
+    public static boolean symbolCheck(char check) {
+        return (check < 'A' || check > 'Z') && (check < 'a' || check > 'z');
     }
 
-    public static boolean checkUpperLowerSymbol(char check) {
-        return check < 'a' || check > 'z';
-    }
-
-    //building anagram from reversed words
+    /**
+     * building anagram from reversed words
+     * @return built anagram
+     */
     public static String buildOfAnagram(String[] wordsAfterReverse) {
         StringBuilder resultString = new StringBuilder();
         int lastIndex = wordsAfterReverse.length - 1;

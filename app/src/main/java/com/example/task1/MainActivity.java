@@ -24,18 +24,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //link between custom toolbar and logic of program
+        /**
+         * link between custom toolbar and logic of program
+         */
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
-        // link between views from xml and logic of program
+        /**
+         * link between views from xml and logic of program
+         */
         TextInputLayout inputLayoutForAnagram = findViewById(R.id.textInputLayotForAnagram);
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
         TextView myAnagram = findViewById(R.id.myAnagram);
 
-//      redefining state of view after rotation
+        /**
+         * redefining state of view after rotation
+         */
         if (savedInstanceState != null) {
             preViewOfAnagram.setVisibility(View.INVISIBLE);
             myAnagram.setVisibility(View.VISIBLE);
@@ -45,11 +51,21 @@ public class MainActivity extends AppCompatActivity {
             filterInputText.setTextSize(22);
         }
 
-        //change state of view editTextForAnagram despite of focus
+        /**
+         * change state of view editTextForAnagram despite of focus
+         */
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
-                if (focusOn || Objects.requireNonNull(editTextForAnagram.getText()).toString().length() > 0) {
+                int editTextLength;
+
+                if (editTextForAnagram.getText().toString() == null) {
+                    editTextLength = 0;
+                } else {
+                    editTextLength = editTextForAnagram.getText().toString().length();
+                }
+
+                if (focusOn || editTextLength > 0) {
                     editTextForAnagram.setTextSize(22);
                     inputLayoutForAnagram.setHint(getString(R.string.text_for_anagram));
                     editTextForAnagram.setGravity(Gravity.START);
@@ -63,11 +79,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //change state of view filterInputText despite of focus
+        /**
+         * change state of view filterInputText despite of focus
+         */
         filterInputText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
-                if (focusOn || Objects.requireNonNull(filterInputText.getText()).toString().length() > 0) {
+                int filterLength;
+
+                if (filterInputText.getText().toString() == null) {
+                    filterLength = 0;
+                } else {
+                    filterLength = filterInputText.getText().toString().length();
+                }
+
+                if (focusOn || filterLength > 0) {
                     filterInputText.setGravity(Gravity.START);
                     filterInputText.setTextSize(22);
                 } else {
@@ -79,7 +105,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //listen of text input and sent each symbol to method in TextConvertToAnagram
+        /**
+         * listen of text input and sent each symbol to method in TextConvertToAnagram
+         */
         editTextForAnagram.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -99,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //listen of filter input and sent each symbol to method in TextConvertToAnagram to correct anagram according to filter
+        /**
+         * listen of filter input and sent each symbol to method in TextConvertToAnagram to correct anagram according to filter
+         */
         filterInputText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -118,7 +148,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //hide keyboard
+    /**
+     * hide keyboard
+     */
     protected void closeKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
