@@ -17,6 +17,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
+    /*
+     *variables which should be visible through whole the scope
+     */
     int editTextLength;
     int filterLength;
     String textForAnagram;
