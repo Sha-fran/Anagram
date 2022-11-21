@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
+    int editTextLength;
+    int filterLength;
+    String textForAnagram;
+    String textForFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,25 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             preViewOfAnagram.setVisibility(View.INVISIBLE);
             myAnagram.setVisibility(View.VISIBLE);
-            editTextForAnagram.setGravity(Gravity.START);
-            filterInputText.setGravity(Gravity.START);
-            editTextForAnagram.setTextSize(22);
-            filterInputText.setTextSize(22);
+            editTextLength = savedInstanceState.getInt("lengthOfText");
+            filterLength = savedInstanceState.getInt("lengthOfFilter");
+
+            if (editTextLength > 0) {
+                editTextForAnagram.setGravity(Gravity.START);
+                editTextForAnagram.setTextSize(22);
+
+            } else {
+                editTextForAnagram.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                editTextForAnagram.setTextSize(16);
+            }
+
+            if (filterLength > 0) {
+                filterInputText.setGravity(Gravity.START);
+                filterInputText.setTextSize(22);
+            } else {
+                filterInputText.setGravity(Gravity.CLIP_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                filterInputText.setTextSize(16);
+            }
         }
 
         /**
@@ -57,12 +75,11 @@ public class MainActivity extends AppCompatActivity {
         editTextForAnagram.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
-                int editTextLength;
 
-                if (editTextForAnagram.getText().toString() == null) {
+                if (textForAnagram == null) {
                     editTextLength = 0;
                 } else {
-                    editTextLength = editTextForAnagram.getText().toString().length();
+                    editTextLength = textForAnagram.length();
                 }
 
                 if (focusOn || editTextLength > 0) {
@@ -85,12 +102,11 @@ public class MainActivity extends AppCompatActivity {
         filterInputText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean focusOn) {
-                int filterLength;
 
-                if (filterInputText.getText().toString() == null) {
+                if (textForFilter == null) {
                     filterLength = 0;
                 } else {
-                    filterLength = filterInputText.getText().toString().length();
+                    filterLength = textForFilter.length();
                 }
 
                 if (focusOn || filterLength > 0) {
@@ -118,7 +134,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 preViewOfAnagram.setVisibility(View.INVISIBLE);
                 myAnagram.setVisibility(View.VISIBLE);
-                myAnagram.setText(TextConvertToAnagram.convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
+                textForAnagram = editTextForAnagram.getText().toString();
+                textForFilter = String.valueOf(filterInputText.getText());
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(textForAnagram, textForFilter));
             }
 
             @Override
@@ -138,7 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                myAnagram.setText(TextConvertToAnagram.convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), Objects.requireNonNull(filterInputText.getText()).toString()));
+                textForFilter = filterInputText.getText().toString();
+                textForAnagram = String.valueOf(editTextForAnagram.getText());
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(textForAnagram, textForFilter));
             }
 
             @Override
@@ -157,5 +177,13 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("lengthOfText", editTextLength);
+        outState.putInt("lengthOfFilter", filterLength);
     }
 }
