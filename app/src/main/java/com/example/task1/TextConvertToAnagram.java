@@ -32,10 +32,10 @@ public class TextConvertToAnagram {
 
         if (filter.isEmpty()) {
             for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-                while (symbolCheck(symbols[i]) && i < j) {
+                while (Character.isAlphabetic(symbols[i]) && i < j) {
                     i++;
                 }
-                while (symbolCheck(symbols[i]) && j > i) {
+                while (Character.isAlphabetic(symbols[i]) && j > i) {
                     j--;
                 }
                 char tmp = symbols[i];
@@ -69,14 +69,6 @@ public class TextConvertToAnagram {
             }
         }
         return false;
-    }
-
-    /**
-     * checking digits and non alphabetic symbols
-     * @return false if symbol is alphabetic and true if no
-     */
-    public static boolean symbolCheck(char check) {
-        return (check < 'A' || check > 'Z') && (check < 'a' || check > 'z');
     }
 
     /**
