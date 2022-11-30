@@ -4,13 +4,22 @@ public class TextConvertToAnagram {
 
     /**
      * start a process of converting - split text for anagram into individual words and create array of words
+     * building anagram from reversed words
      * @return built anagram
      */
     public static String convertToAnagram(String text, String filter) {
         String[] words = text.split("\\s+");
         symbolsInWordsReverse(words, filter);
 
-        return buildOfAnagram(words);
+        StringBuilder resultString = new StringBuilder();
+        int lastIndex = words.length - 1;
+
+        for (int i = 0; i < lastIndex; i++) {
+            resultString.append(words[i]).append(" ");
+        }
+        resultString.append(words[lastIndex]);
+
+        return resultString.toString();
     }
 
     /**
@@ -59,21 +68,5 @@ public class TextConvertToAnagram {
      */
     private static boolean filterCheck(String symbolToCheck, String filter) {
         return filter.contains(symbolToCheck);
-    }
-
-    /**
-     * building anagram from reversed words
-     * @return built anagram
-     */
-    private static String buildOfAnagram(String[] wordsAfterReverse) {
-        StringBuilder resultString = new StringBuilder();
-        int lastIndex = wordsAfterReverse.length - 1;
-
-        for (int i = 0; i < lastIndex; i++) {
-            resultString.append(wordsAfterReverse[i]).append(" ");
-        }
-        resultString.append(wordsAfterReverse[lastIndex]);
-
-        return resultString.toString();
     }
 }
