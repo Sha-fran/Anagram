@@ -34,88 +34,84 @@
             app:layout_constraintTop_toTopOf="@+id/myToolbar" />
     </androidx.appcompat.widget.Toolbar>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayotForAnagram"
-            android:layout_width="403dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="32dp"
-            android:hint="@string/enter_text_for_anagram"
-            android:textColorHint="#8D8D8D"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:hintTextColor="#8D8D8D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayotForAnagram"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
+        android:hint="@string/enter_text_for_anagram"
+        android:textColorHint="#8D8D8D"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:hintTextColor="#8D8D8D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextForAnagram"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:gravity="clip_vertical|center_horizontal"
-                android:inputType="text"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/filterInputlayot"
-            android:layout_width="403dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            android:textColorHint="#8D8D8D"
-            app:boxCornerRadiusTopEnd="12dp"
-            app:boxCornerRadiusTopStart="12dp"
-            app:hintTextColor="#8D8D8D"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayotForAnagram">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/filterInputText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:gravity="clip_vertical|center_horizontal"
-                android:hint="@string/enter_symbols_to_ignore"
-                android:textSize="16sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/preViewOfAnagram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/here_must_be_your_anagram"
-            android:textStyle="bold"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
-
-        <TextView
-            android:id="@+id/myAnagram"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextForAnagram"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="32dp"
-            android:text="@string/textview"
-            android:textColor="#ffaa00"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
+            android:gravity="clip_vertical|center_horizontal"
+            android:inputType="text"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/filterInputlayot"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        android:textColorHint="#8D8D8D"
+        app:boxCornerRadiusTopEnd="12dp"
+        app:boxCornerRadiusTopStart="12dp"
+        app:hintTextColor="#8D8D8D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayotForAnagram">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/filterInputText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="clip_vertical|center_horizontal"
+            android:hint="@string/enter_symbols_to_ignore"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/preViewOfAnagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/here_must_be_your_anagram"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
+
+    <TextView
+        android:id="@+id/myAnagram"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/textview"
+        android:textColor="#ffaa00"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
