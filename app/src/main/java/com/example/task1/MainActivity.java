@@ -11,8 +11,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 preViewOfAnagram.setVisibility(View.INVISIBLE);
                 myAnagram.setVisibility(View.VISIBLE);
-                myAnagram.setText(TextConvertToAnagram.convertToAnagram(Objects.requireNonNull(editTextForAnagram.getText()).toString(), filterInputText.getText().toString()));
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(editTextForAnagram.getText().toString(), filterInputText.getText().toString()));
             }
 
             @Override

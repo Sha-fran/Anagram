@@ -32,11 +32,11 @@ public class TextConvertToAnagram {
         char[] symbols = word.toCharArray();
 
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-            if (filterCheck(symbols[i], filter)) {
+            if (symbolCheck(symbols[i], filter)) {
                 i++;
-            }
-            ;
-            if (filterCheck(symbols[j], filter)) {
+            };
+
+            if (symbolCheck(symbols[j], filter) && j > i) {
                 j--;
             };
 
@@ -44,9 +44,8 @@ public class TextConvertToAnagram {
             symbols[i] = symbols[j];
             symbols[j] = tmp;
         }
-        word = new String(symbols);
 
-        return word;
+        return new String(symbols);
     }
 
     /**
@@ -54,7 +53,11 @@ public class TextConvertToAnagram {
      *
      * @return true symbol anf filter are equal and false if no
      */
-    private static boolean filterCheck(char symbolToCheck, String filter) {
-        return !Character.isAlphabetic(symbolToCheck) || filter.lastIndexOf(symbolToCheck) != -1;
+    private static boolean symbolCheck(char symbolToCheck, String filter) {
+        if (filter.isEmpty()) {
+            return !Character.isAlphabetic(symbolToCheck);
+        } else {
+            return  filter.lastIndexOf(symbolToCheck) != -1;
+        }
     }
 }
