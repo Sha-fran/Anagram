@@ -9,8 +9,15 @@ public class TextConvertToAnagram {
      */
     public static String convertToAnagram(String text, String filter) {
         String[] words = text.split("\\s+");
+        StringBuilder anagrama = new StringBuilder();
+        int lastIndex = words.length - 1;
 
-        return symbolsInWordsReverse(words, filter);
+        for (int i = 0; i < lastIndex; i++) {
+            anagrama.append(symbolsInWordsReverse(words[i], filter)).append(" ");
+        }
+        anagrama.append(symbolsInWordsReverse(words[lastIndex], filter));
+        
+        return anagrama.toString();
     }
 
     /**
@@ -20,12 +27,8 @@ public class TextConvertToAnagram {
      * building anagram from reversed words     *
      * @return built anagram
      */
-    private static String symbolsInWordsReverse(String[] words, String filter) {
-        StringBuilder anagrama = new StringBuilder();
-        int lastIndex = words.length - 1;
-
-        for (int k = 0; k < words.length; k++) {
-            char[] symbols = words[k].toCharArray();
+    private static String symbolsInWordsReverse(String word, String filter) {
+            char[] symbols = word.toCharArray();
 
             for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
                 if (filter.isEmpty()) {
@@ -48,15 +51,9 @@ public class TextConvertToAnagram {
                 symbols[i] = symbols[j];
                 symbols[j] = tmp;
             }
-            words[k] = new String(symbols);
-
-            if (k < lastIndex) {
-                anagrama.append(words[k]).append(" ");
-            } else {
-                anagrama.append(words[k]);
-            }
-        }
-        return anagrama.toString();
+        word = new String(symbols);
+            
+        return word;
     }
 
     /**
