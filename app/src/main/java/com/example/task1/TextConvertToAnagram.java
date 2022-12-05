@@ -4,7 +4,7 @@ public class TextConvertToAnagram {
 
     /**
      * start a process of converting - split text for anagram into individual words and create array of words
-     *
+     * build anagram from reversed words
      * @return built anagram
      */
     public static String convertToAnagram(String text, String filter) {
@@ -24,7 +24,6 @@ public class TextConvertToAnagram {
      * loop directs each word to reverse
      * reverse each word taking into account filter symbols - keep position of symbols from filter
      * check each symbol - doesn't take into account digits and non alphabetic symbols
-     * building anagram from reversed words     *
      *
      * @return built anagram
      */
@@ -32,13 +31,7 @@ public class TextConvertToAnagram {
         char[] symbols = word.toCharArray();
 
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-            if (symbolCheck(symbols[i], filter)) {
-                i++;
-            };
-
-            if (symbolCheck(symbols[j], filter) && j > i) {
-                j--;
-            };
+            i = symbolCheck(symbols[i], filter, i);
 
             char tmp = symbols[i];
             symbols[i] = symbols[j];
@@ -53,11 +46,16 @@ public class TextConvertToAnagram {
      *
      * @return true symbol anf filter are equal and false if no
      */
-    private static boolean symbolCheck(char symbolToCheck, String filter) {
+    private static int symbolCheck(char symbolToCheck, String filter, int index) {
         if (filter.isEmpty()) {
-            return !Character.isAlphabetic(symbolToCheck);
+            if (!Character.isAlphabetic(symbolToCheck)) {
+                return index + 1;
+            }
         } else {
-            return  filter.lastIndexOf(symbolToCheck) != -1;
+            if  (filter.lastIndexOf(symbolToCheck) != -1) {
+                return index +1;
+            }
         }
+        return  index;
     }
 }
