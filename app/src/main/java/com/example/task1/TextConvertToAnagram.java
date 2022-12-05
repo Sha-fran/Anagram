@@ -31,7 +31,12 @@ public class TextConvertToAnagram {
         char[] symbols = word.toCharArray();
 
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-            i = symbolCheck(symbols[i], filter, i);
+            while (symbolCheck(symbols[i], filter) && i < j) {
+                i++;
+            }
+            while (symbolCheck(symbols[j], filter) && i < j) {
+                j--;
+            }
 
             char tmp = symbols[i];
             symbols[i] = symbols[j];
@@ -46,16 +51,10 @@ public class TextConvertToAnagram {
      *
      * @return true symbol anf filter are equal and false if no
      */
-    private static int symbolCheck(char symbolToCheck, String filter, int index) {
+    private static boolean symbolCheck(char symbolToCheck, String filter) {
         if (filter.isEmpty()) {
-            if (!Character.isAlphabetic(symbolToCheck)) {
-                return index + 1;
-            }
-        } else {
-            if  (filter.lastIndexOf(symbolToCheck) != -1) {
-                return index +1;
-            }
+            return !Character.isAlphabetic(symbolToCheck);
         }
-        return  index;
+        return filter.lastIndexOf(symbolToCheck) != -1;
     }
 }
