@@ -5,6 +5,7 @@ public class TextConvertToAnagram {
     /**
      * start a process of converting - split text for anagram into individual words and create array of words
      * build anagram from reversed words
+     *
      * @return built anagram
      */
     public static String convertToAnagram(String text, String filter) {
@@ -31,16 +32,18 @@ public class TextConvertToAnagram {
         char[] symbols = word.toCharArray();
 
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
-            while (symbolCheck(symbols[i], filter) && i < j) {
+            if (symbolCheck(symbols[i], filter)) {
                 i++;
             }
-            while (symbolCheck(symbols[j], filter) && i < j) {
+            if (symbolCheck(symbols[j], filter) && i < j) {
                 j--;
             }
 
-            char tmp = symbols[i];
-            symbols[i] = symbols[j];
-            symbols[j] = tmp;
+            if (i < j && !symbolCheck(symbols[i + 1], filter) || !symbolCheck(symbols[j - 1], filter)) {
+                char tmp = symbols[i];
+                symbols[i] = symbols[j];
+                symbols[j] = tmp;
+            }
         }
 
         return new String(symbols);
@@ -55,6 +58,7 @@ public class TextConvertToAnagram {
         if (filter.isEmpty()) {
             return !Character.isAlphabetic(symbolToCheck);
         }
-        return filter.lastIndexOf(symbolToCheck) != -1;
+
+        return filter.indexOf(symbolToCheck) != -1;
     }
 }
