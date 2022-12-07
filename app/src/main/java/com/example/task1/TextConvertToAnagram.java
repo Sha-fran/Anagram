@@ -34,7 +34,7 @@ public class TextConvertToAnagram {
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
             if (symbolCheck(symbols[i], filter)) {
                 i++;
-            } else if (symbolCheck(symbols[j], filter) && i < j) {
+            } else if (symbolCheck(symbols[j], filter)) {
                 j--;
             } else {
                 char tmp = symbols[i];
