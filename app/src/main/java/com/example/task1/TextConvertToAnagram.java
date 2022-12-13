@@ -9,16 +9,15 @@ public class TextConvertToAnagram {
      * @return built anagram
      */
     public static String convertToAnagram(String text, String filter) {
-        String[] words = text.split("\\s+");
-        StringBuilder anagrama = new StringBuilder();
-        int lastIndex = words.length - 1;
+        final String[] words = text.split("\\s+");
+        final StringBuilder anagram = new StringBuilder();
+        final int lastIndex = words.length - 1;
 
         for (int i = 0; i < lastIndex; i++) {
-            anagrama.append(symbolsInWordsReverse(words[i], filter)).append(" ");
+            anagram.append(symbolsInWordsReverse(words[i], filter)).append(" ");
         }
-        anagrama.append(symbolsInWordsReverse(words[lastIndex], filter));
-
-        return anagrama.toString();
+        anagram.append(symbolsInWordsReverse(words[lastIndex], filter));
+        return anagram.toString();
     }
 
     /**
@@ -29,7 +28,7 @@ public class TextConvertToAnagram {
      * @return built anagram
      */
     private static String symbolsInWordsReverse(String word, String filter) {
-        char[] symbols = word.toCharArray();
+        final char[] symbols = word.toCharArray();
 
         for (int i = 0, j = symbols.length - 1; i < j; i++, j--) {
             if (symbolCheck(symbols[i], filter)) {
@@ -42,7 +41,6 @@ public class TextConvertToAnagram {
                 symbols[j] = tmp;
             }
         }
-
         return new String(symbols);
     }
 
@@ -51,11 +49,7 @@ public class TextConvertToAnagram {
      *
      * @return true symbol anf filter are equal and false if no
      */
-    private static boolean symbolCheck(char symbolToCheck, String filter) {
-        if (filter.isEmpty()) {
-            return !Character.isAlphabetic(symbolToCheck);
-        }
-
-        return filter.indexOf(symbolToCheck) != -1;
+    private static boolean symbolCheck(char symbol, String filter) {
+        return filter.isEmpty() ? !Character.isAlphabetic(symbol) : filter.indexOf(symbol) != -1;
     }
 }
