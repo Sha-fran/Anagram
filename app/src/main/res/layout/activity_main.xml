@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myToolbar"
@@ -17,8 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:ignore="MissingConstraints">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
             android:id="@+id/textView"
@@ -27,28 +22,21 @@
             android:gravity="center"
             android:text="@string/task_1"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myToolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/myToolbar" />
+            android:textSize="16sp" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayotForAnagram"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/InputLayoutStyle"
         android:hint="@string/enter_text_for_anagram"
-        android:textColorHint="#8D8D8D"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:hintTextColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintVertical_bias="0.17">
+        app:layout_constraintVertical_bias="0.17"
+        app:layout_constraintWidth_percent="1.0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextForAnagram"
@@ -63,18 +51,14 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/filterInputlayot"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textColorHint="#8D8D8D"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:hintTextColor="#8D8D8D"
+        style="@style/InputLayoutStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayotForAnagram"
-        app:layout_constraintVertical_bias="0.1">
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintWidth_percent="1.0">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/filterInputText"
@@ -89,15 +73,17 @@
 
     <TextView
         android:id="@+id/preViewOfAnagram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:text="@string/here_must_be_your_anagram"
         android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterInputlayot" />
+        app:layout_constraintTop_toBottomOf="@+id/filterInputlayot"
+        app:layout_constraintWidth_percent="1.0" />
 
     <TextView
         android:id="@+id/myAnagram"

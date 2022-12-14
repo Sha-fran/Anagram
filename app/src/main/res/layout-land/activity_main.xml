@@ -27,27 +27,19 @@
             android:gravity="center"
             android:text="@string/task_1"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/myToolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/myToolbar" />
+            android:textSize="16sp" />
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayotForAnagram"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        style="@style/InputLayoutStyle"
         android:hint="@string/enter_text_for_anagram"
-        android:textColorHint="#8D8D8D"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:hintTextColor="#8D8D8D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintVertical_bias="0.3">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,15 +55,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/filterInputlayot"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:textColorHint="#8D8D8D"
-        app:boxCornerRadiusTopEnd="12dp"
-        app:boxCornerRadiusTopStart="12dp"
-        app:hintTextColor="#8D8D8D"
+        style="@style/InputLayoutStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayotForAnagram"
         app:layout_constraintVertical_bias="0.1">
