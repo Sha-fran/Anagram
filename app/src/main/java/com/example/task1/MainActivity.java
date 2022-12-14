@@ -18,15 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**
-         * link between custom toolbar and logic of program
-         */
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
-        /**
-         * link between views from xml and logic of program
-         */
         TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
         TextInputEditText filterInputText = findViewById(R.id.filterInputText);
         TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
@@ -50,16 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-
-        /**
-         * listen of text input and sent each symbol to method in TextConvertToAnagram
-         */
         editTextForAnagram.addTextChangedListener(textWatcher);
-
-        /**
-         * listen of filter input and sent each symbol to method in TextConvertToAnagram to correct anagram according to filter
-         */
         filterInputText.addTextChangedListener(textWatcher);
-
     }
 }

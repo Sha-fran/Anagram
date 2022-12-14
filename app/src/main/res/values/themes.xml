@@ -24,5 +24,4 @@
         <item name="android:gravity">center</item>
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
     </style>
-
 </resources>
