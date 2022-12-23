@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 preViewOfAnagram.setVisibility(View.INVISIBLE);
                 myAnagram.setVisibility(View.VISIBLE);
-                myAnagram.setText(TextConvertToAnagram.convertToAnagram(editTextForAnagram.getText().toString(), filterInputText.getText().toString()));
+                myAnagram.setText(TextConvertToAnagram.convertToAnagram(
+                        editTextForAnagram.getText().toString(), filterInputText.getText().toString()
+                ));
             }
 
             @Override
