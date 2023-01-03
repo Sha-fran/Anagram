@@ -11,7 +11,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TextWatcher {
+    private TextInputEditText editTextForAnagram;
+    private TextInputEditText filterInputText;
+    private TextView preViewOfAnagram;
+    private TextView myAnagram;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,32 +25,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.myToolbar);
         setSupportActionBar(toolbar);
 
-        TextInputEditText editTextForAnagram = findViewById(R.id.editTextForAnagram);
-        TextInputEditText filterInputText = findViewById(R.id.filterInputText);
-        TextView preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
-        TextView myAnagram = findViewById(R.id.myAnagram);
+        editTextForAnagram = findViewById(R.id.editTextForAnagram);
+        filterInputText = findViewById(R.id.filterInputText);
+        preViewOfAnagram = findViewById(R.id.preViewOfAnagram);
+        myAnagram = findViewById(R.id.myAnagram);
 
-        TextWatcher textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        editTextForAnagram.addTextChangedListener(this);
+        filterInputText.addTextChangedListener(this);
+    }
 
-            }
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                preViewOfAnagram.setVisibility(View.INVISIBLE);
-                myAnagram.setVisibility(View.VISIBLE);
-                myAnagram.setText(TextConvertToAnagram.convertToAnagram(
-                        editTextForAnagram.getText().toString(), filterInputText.getText().toString()
-                ));
-            }
+    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        preViewOfAnagram.setVisibility(View.INVISIBLE);
+        myAnagram.setVisibility(View.VISIBLE);
+        myAnagram.setText(TextConvertToAnagram.convertToAnagram(
+                editTextForAnagram.getText().toString(), filterInputText.getText().toString()
+        ));
+    }
 
-            }
-        };
-        editTextForAnagram.addTextChangedListener(textWatcher);
-        filterInputText.addTextChangedListener(textWatcher);
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
