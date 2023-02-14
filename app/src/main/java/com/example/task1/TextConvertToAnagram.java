@@ -1,5 +1,7 @@
 package com.example.task1;
 
+import androidx.annotation.Nullable;
+
 public class TextConvertToAnagram {
 
     /**
@@ -8,7 +10,12 @@ public class TextConvertToAnagram {
      *
      * @return built anagram
      */
-    public static String convertToAnagram(String text, String filter) {
+    @Nullable
+    static String convertToAnagram(String text, String filter) {
+        if (text == null || filter == null) {
+            return null;
+        }
+
         final String[] words = text.split("\\s+");
         final StringBuilder anagram = new StringBuilder();
         final int lastIndex = words.length - 1;
