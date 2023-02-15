@@ -6,41 +6,28 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TextConvertToAnagramTest {
-    private final FieldsForTests case1 = new FieldsForTests();
-    private final FieldsForTests case2 = new FieldsForTests();
-    private final FieldsForTests case3 = new FieldsForTests();
-    private final ArrayList<FieldsForTests> testCases = new ArrayList<>();
-
-    private final FieldsForTests caseNullInInput = new FieldsForTests();
+    private final List<FieldsForTests> testCases = new ArrayList<FieldsForTests>() {{
+        new FieldsForTests("Foxminded cool 24/7", "xl", "dexdnimoF oocl 7/42");
+        new FieldsForTests("", "xl", "");
+        new FieldsForTests("Foxminded cool 24/7", "", "dednimxoF looc 24/7");
+    }};
 
     @Test
     public void anagramCasesTesting() {
-        case1.setInput("Foxminded cool 24/7");
-        case1.setFilter("xl");
-        case1.setExpectedOutput("dexdnimoF oocl 7/42");
 
-        case2.setInput("");
-        case2.setFilter("xl");
-        case2.setExpectedOutput("");
-
-        case3.setInput("Foxminded cool 24/7");
-        case3.setFilter("");
-        case3.setExpectedOutput("dednimxoF looc 24/7");
-
-        testCases.add(case1);
-        testCases.add(case2);
-        testCases.add(case3);
-
-        for (FieldsForTests cases: testCases) {
-            assertEquals(cases.getExpectedOutput(), TextConvertToAnagram.convertToAnagram(cases.getInput(), cases.getFilter()));
+        for (FieldsForTests cases : testCases) {
+            assertEquals(cases.expectedOutput, TextConvertToAnagram.convertToAnagram(cases.input, cases.filter));
         }
     }
+
     @Test
     public void testNullInInput() {
-        assertNull(caseNullInInput.getExpectedOutput(), TextConvertToAnagram.convertToAnagram(null, "xl"));
+        assertNull(TextConvertToAnagram.convertToAnagram(null, "xl"));
     }
+
     @Test
     public void testNullInFilter() {
         assertNull(TextConvertToAnagram.convertToAnagram("Foxminded cool 24/7", null));

@@ -12,9 +12,6 @@ public class TextConvertToAnagram {
      */
     @Nullable
     static String convertToAnagram(String text, String filter) {
-        if (text == null || filter == null) {
-            return null;
-        }
 
         final String[] words = text.split("\\s+");
         final StringBuilder anagram = new StringBuilder();
