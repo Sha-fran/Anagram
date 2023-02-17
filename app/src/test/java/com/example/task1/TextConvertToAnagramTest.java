@@ -3,12 +3,18 @@ package com.example.task1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import androidx.annotation.Nullable;
+
+import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextConvertToAnagramTest {
+
     private final List<FieldsForTests> testCases = new ArrayList<FieldsForTests>() {{
         new FieldsForTests("Foxminded cool 24/7", "xl", "dexdnimoF oocl 7/42");
         new FieldsForTests("", "xl", "");
@@ -23,12 +29,13 @@ public class TextConvertToAnagramTest {
         }
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testNullInInput() {
         assertNull(TextConvertToAnagram.convertToAnagram(null, "xl"));
     }
 
-    @Test
+
+    @Test(expected = NullPointerException.class)
     public void testNullInFilter() {
         assertNull(TextConvertToAnagram.convertToAnagram("Foxminded cool 24/7", null));
     }
