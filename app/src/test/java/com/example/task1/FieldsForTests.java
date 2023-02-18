@@ -3,7 +3,6 @@ package com.example.task1;
 public class FieldsForTests {
 
     public  String input;
-
     public  String filter;
     public  String expectedOutput;
 
